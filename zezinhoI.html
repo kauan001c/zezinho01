@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zezinho Sports - Paixão pelo Futebol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --preto: #0A0A0A;
+            --azul-escuro: #0D1B2A;
+            --verde: #00CC4B;
+            --branco: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--preto);
+            color: var(--branco);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Campo de futebol animado */
+        .soccer-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(rgba(13, 27, 42, 0.85), rgba(10, 10, 10, 0.9)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="180" viewBox="0 0 100 180"><rect x="0" y="0" width="100" height="180" fill="%2300CC4B" opacity="0.3"/><path d="M50,0 L50,180 M0,90 L100,90" stroke="white" stroke-width="2" opacity="0.2"/><circle cx="50" cy="90" r="20" fill="none" stroke="white" stroke-width="2" opacity="0.2"/></svg>');
+            background-size: 200px 360px;
+            animation: fieldMove 20s infinite linear;
+        }
+        
+        @keyframes fieldMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 200px 360px; }
+        }
+        
+        /* Efeito de luzes do estádio */
+        .stadium-lights {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 10%, rgba(255,255,255,0.1) 0%, transparent 20%),
+                        radial-gradient(circle at 80% 10%, rgba(255,255,255,0.1) 0%, transparent 20%),
+                        radial-gradient(circle at 40% 90%, rgba(255,255,255,0.1) 0%, transparent 20%);
+            animation: lightsPulse 8s infinite alternate;
+        }
+        
+        @keyframes lightsPulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.6; }
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(13, 27, 42, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--verde);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.8rem;
+            color: var(--branco);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--verde);
+            margin: 0 5px;
+        }
+        
+        .logo i {
+            color: var(--verde);
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+            position: relative;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--branco);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            padding: 10px 0;
+        }
+        
+        nav ul li a:hover {
+            color: var(--verde);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--verde);
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .header-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .header-icons a {
+            color: var(--branco);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .header-icons a:hover {
+            color: var(--verde);
+            background: rgba(0, 204, 75, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        /* Banner */
+        .banner {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--verde), var(--azul-escuro));
+            animation: gradientMove 3s infinite linear;
+        }
+        
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        .banner-content {
+            z-index: 2;
+            animation: fadeIn 1.5s ease-in-out;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .banner h1 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 5rem;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--branco);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .banner p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #ccc;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--verde);
+            color: var(--preto);
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--azul-escuro);
+            transition: width 0.5s;
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            color: var(--branco);
+        }
+        
+        /* Seções */
+        .section-title {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 3rem;
+            text-align: center;
+            margin: 70px 0 40px;
+            position: relative;
+            color: var(--branco);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--verde);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        /* Destaques */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .product-card {
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            transition: all 0.4s;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            border-color: var(--verde);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--verde);
+            color: var(--preto);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 2;
+        }
+        
+        .product-image {
+            height: 280px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--branco);
+        }
+        
+        .product-category {
+            color: var(--verde);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .product-price {
+            font-weight: 700;
+            color: var(--branco);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .old-price {
+            text-decoration: line-through;
+            color: #888;
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+        
+        .product-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .buy-btn {
+            background: var(--verde);
+            color: var(--preto);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+        
+        .buy-btn:hover {
+            background: var(--azul-escuro);
+            color: var(--branco);
+            transform: scale(1.05);
+        }
+        
+        .wishlist-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--branco);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .wishlist-btn:hover {
+            background: var(--verde);
+            color: var(--preto);
+        }
+        
+        /* Times Populares */
+        .teams-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 25px;
+            padding: 30px 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--verde) var(--preto);
+        }
+        
+        .teams-slider::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .teams-slider::-webkit-scrollbar-thumb {
+            background: var(--verde);
+            border-radius: 10px;
+        }
+        
+        .team-item {
+            min-width: 180px;
+            text-align: center;
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            padding: 20px;
+            border-radius: 15px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .team-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-color: var(--verde);
+        }
+        
+        .team-logo {
+            width: 120px;
+            height: 120px;
+            background-color: var(--branco);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+            overflow: hidden;
+        }
+        
+        .team-logo:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .team-logo i {
+            font-size: 3rem;
+            color: var(--verde);
+        }
+        
+        .team-name {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .team-country {
+            color: var(--verde);
+            font-size: 0.9rem;
+        }
+        
+        /* Frete Grátis */
+        .shipping-banner {
+            background: var(--verde);
+            color: var(--preto);
+            text-align: center;
+            padding: 20px;
+            margin: 50px 0;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            padding: 50px;
+            border-radius: 20px;
+            margin: 50px 0;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .newsletter h2 {
+            margin-bottom: 20px;
+        }
+        
+        .newsletter p {
+            margin-bottom: 30px;
+            color: #ccc;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex-grow: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--branco);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .newsletter-form button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 0 30px 30px 0;
+            background: var(--verde);
+            color: var(--preto);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .newsletter-form button:hover {
+            background: var(--azul-escuro);
+            color: var(--branco);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--azul-escuro);
+            color: var(--branco);
+            padding: 70px 0 20px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--verde);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--branco);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--verde);
+        }
+        
+        .footer-column p {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-column ul li a i {
+            margin-right: 10px;
+            color: var(--verde);
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--branco);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--branco);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--verde);
+            color: var(--preto);
+            transform: translateY(-5px);
+        }
+        
+        .payment-methods {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .payment-methods span {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        /* WhatsApp flutuante */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background-color: var(--verde);
+            color: var(--preto);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            z-index: 99;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-float:hover {
+            background-color: #00aa3e;
+            transform: scale(1.1);
+        }
+        
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .banner h1 {
+                font-size: 3.5rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input {
+                border-radius: 30px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-form button {
+                border-radius: 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .banner h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .newsletter {
+                padding: 30px 15px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fundo animado de campo de futebol -->
+    <div class="soccer-field"></div>
+    <div class="stadium-lights"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <i class="fas fa-futbol"></i>
+                    Zezinho <span>Sports</span>
+                </a>
+                
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Produtos</a></li>
+                        <li><a href="#">Times</a></li>
+                        <li><a href="#">Campeonatos</a></li>
+                        <li><a href="#">Contato</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-icons">
+                    <a href="#"><i class="fas fa-search"></i></a>
+                    <a href="#"><i class="fas fa-user"></i></a>
+                    <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner Principal -->
+    <section class="banner">
+        <div class="banner-content">
+            <h1>VIVA A EMOÇÃO DO ESPORTE</h1>
+            <p>Os melhores produtos esportivos com qualidade e preço imbatível. Vista a paixão pelo seu time com a Zezinho Sports!</p>
+            <a href="#" class="btn">Descubra agora</a>
+        </div>
+    </section>
+
+    <!-- Destaques da Semana -->
+    <section class="container">
+        <h2 class="section-title">🔥 Destaques da Semana</h2>
+        
+        <div class="products-grid">
+            <!-- Produto 1 -->
+            <div class="product-card">
+                <div class="product-badge">-20%</div>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Camisa Flamengo">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Futebol</span>
+                    <h3>Camisa Flamengo I 23/24</h3>
+                    <div class="product-price">
+                        <span class="old-price">R$ 299,90</span>
+                        <span>R$ 239,90</span>
+                    </div>
+                    <div class="product-action">
+                        <button class="buy-btn">Comprar</button>
+                        <div class="wishlist-btn">
+                            <i class="far fa-heart"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Produto 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Camisa Corinthians">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Futebol</span>
+                    <h3>Camisa Corinthians I 23/24</h3>
+                    <div class="product-price">
+                        <span>R$ 249,90</span>
+                    </div>
+                    <div class="product-action">
+                        <button class="buy-btn">Comprar</button>
+                        <div class="wishlist-btn">
+                            <i class="far fa-heart"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Produto 3 -->
+            <div class="product-card">
+                <div class="product-badge">NOVO</div>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1614624532983-1fe21c1d1d41?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Camisa Brasil">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Futebol</span>
+                    <h3>Camisa Brasil I 2023</h3>
+                    <div class="product-price">
+                        <span>R$ 279,90</span>
+                    </div>
+                    <div class="product-action">
+                        <button class="buy-btn">Comprar</button>
+                        <div class="wishlist-btn">
+                            <i class="far fa-heart"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Produto 4 -->
+            <div class="product-card">
+                <div class="product-badge">-15%</div>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Chuteira">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Chuteiras</span>
+                    <h3>Chuteira Nike Mercurial</h3>
+                    <div class="product-price">
+                        <span class="old-price">R$ 599,90</span>
+                        <span>R$ 499,90</span>
+                    </div>
+                    <div class="product-action">
+                        <button class="buy-btn">Comprar</button>
+                        <div class="wishlist-btn">
+                            <i class="far fa-heart"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Times Populares -->
+    <section class="container">
+        <h2 class="section-title">🏆 Times Populares</h2>
+        
+        <div class="teams-slider">
+            <!-- Time 1 -->
+            <div class="team-item">
+                <div class="team-logo">
+                    <i class="fas fa-times" style="color: #E21836;"></i>
+                </div>
+                <p class="team-name">Flamengo</p>
+                <p class="team-country">Brasil</p>
+            </div>
+            
+            <!-- Time 2 -->
+            <div class="team-item">
+                <div class="team-logo">
+                    <i class="fas fa-times" style="color: #000000;"></i>
+                </div>
+                <p class="team-name">Corinthians</p>
+                <p class="team-country">Brasil</p>
+            </div>
+            
+            <!-- Time 3 -->
+            <div class="team-item">
+                <div class="team-logo">
+                    <i class="fas fa-times" style="color: #0066B3;"></i>
+                </div>
+                <p class="team-name">Palmeiras</p>
+                <p class="team-country">Brasil</p>
+            </div>
+            
+            <!-- Time 4 -->
+            <div class="team-item">
+                <div class="team-logo">
+                    <i class="fas fa-times" style="color: #FF0000;"></i>
+                </div>
+                <p class="team-name">São Paulo</p>
+                <p class="team-country">Brasil</p>
+            </div>
+            
+            <!-- Time 5 -->
+            <div class="team-item">
+                <div class="team-logo">
+                    <i class="fas fa-times" style="color: #000000;"></i>
+                </div>
+                <p class="team-name">Santos</p>
+                <p class="team-country">Brasil</p>
+            </div>
+            
+            <!-- Time 6 -->
+            <div class="team-item">
+                <div class="team-logo">
+                    <i class="fas fa-times" style="color: #00A650;"></i>
+                </div>
+                <p class="team-name">Grêmio</p>
+                <p class="team-country">Brasil</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frete Grátis -->
+    <section class="container">
+        <div class="shipping-banner">
+            <p>📦 FRETE GRÁTIS PARA TODO BRASIL EM COMPRAS ACIMA DE R$ 199,00</p>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="container">
+        <div class="newsletter">
+            <h2>Fique por dentro das novidades</h2>
+            <p>Cadastre-se para receber em primeira mão as promoções e lançamentos exclusivos</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Seu melhor e-mail" required>
+                <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Zezinho Sports</h3>
+                    <p>Vista a paixão pelo esporte com os melhores produtos e acessórios esportivos.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Institucional</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Sobre nós</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Nossas lojas</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Trabalhe conosco</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Política de privacidade</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Termos e condições</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Atendimento</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Central de ajuda</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Como comprar</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Trocas e devoluções</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Prazos de entrega</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Status do pedido</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Av. Paulista, 1000 - São Paulo</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> (11) 3000-1000</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> contato@zezinho-sports.com.br</a></li>
+                    </ul>
+                    
+                    <h3>Formas de pagamento</h3>
+                    <div class="payment-methods">
+                        <span>Cartão</span>
+                        <span>PIX</span>
+                        <span>Boleto</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Zezinho Sports - Todos os direitos reservados. CNPJ: 12.345.678/0001-99</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Flutuante -->
+    <a href="https://wa.me/5511999999999" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Adicionar efeito de digitação ao banner
+        document.addEventListener('DOMContentLoaded', function() {
+            const bannerTitle = document.querySelector('.banner h1');
+            const originalText = bannerTitle.textContent;
+            bannerTitle.textContent = '';
+            
+            let i = 0;
+            const speed = 100;
+            
+            function typeWriter() {
+                if (i < originalText.length) {
+                    bannerTitle.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                }
+            }
+            
+            setTimeout(typeWriter, 1000);
+        });
+    </script>
+</body>
+</html>
